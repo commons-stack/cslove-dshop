@@ -20,16 +20,16 @@ const Defaults = {
     ipfsApi: 'https://fs.ogn.app',
     marketplaceContract: '0x698Ff47B84837d3971118a369c570172EE7e54c2',
     marketplaceVersion: '001',
-    provider: '',
-    providerWs: ''
+    provider: process.env.PROVIDER || '',
+    providerWs: process.env.PROVIDER_WS || ''
   },
   4: {
     ipfs: 'https://fs-autossl.staging.ogn.app',
     ipfsApi: 'https://fs.staging.ogn.app',
     marketplaceContract: '0x3D608cCe08819351adA81fC1550841ebc10686fd',
     marketplaceVersion: '001',
-    provider: '',
-    providerWs: ''
+    provider: process.env.PROVIDER || '',
+    providerWs: process.env.PROVIDER_WS || ''
   },
   999: {
     ipfs: process.env.IPFS_GATEWAY || 'http://localhost:8080',

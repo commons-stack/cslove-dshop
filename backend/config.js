@@ -14,15 +14,23 @@ const Defaults = {
     marketplaceContract: process.env.MARKETPLACE_CONTRACT
   },
   4: {
-    ipfsGateway: 'https://fs-autossl.staging.ogn.app',
-    ipfsApi: 'https://fs.staging.ogn.app',
+    ipfsGateway: 'https://fs-autossl.ogn.app',
+    ipfsApi: 'https://fs.ogn.app',
+    backend: 'https://ogn-rinkeby.commonsstack.org',
     marketplaceContract: '0x3d608cce08819351ada81fc1550841ebc10686fd',
+    provider: 'https://rinkeby.infura.io/v3/9bd0023135a246db86f6dd4f3dd3026a',
+    providerWs:
+      'wss://rinkeby.infura.io/ws/v3/9bd0023135a246db86f6dd4f3dd3026a',
     fetchPastLogs: true
   },
   1: {
     ipfsGateway: 'https://fs-autossl.ogn.app',
     ipfsApi: 'https://fs.ogn.app',
+    backend: 'https://ogn.commonsstack.org',
     marketplaceContract: '0x698ff47b84837d3971118a369c570172ee7e54c2',
+    provider: 'https://mainnet.infura.io/v3/9bd0023135a246db86f6dd4f3dd3026a',
+    providerWs:
+      'wss://mainnet.infura.io/ws/v3/9bd0023135a246db86f6dd4f3dd3026a',
     fetchPastLogs: true
   }
 }

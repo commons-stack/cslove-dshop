@@ -1,0 +1,96 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:13.1
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - APP_DB_USER
+      - APP_DB_PASS
+      - APP_DB_NAME
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432/tcp
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    expose:
+      - 6379/tcp
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master
+
+  dshop-rinkeby:
+    image: "registry.gitlab.com/commonsstacklove/cs-dshop:0.5"
+    depends_on:
+      - redis
+      - postgres
+    expose:
+      - 3001/tcp
+    environment:
+      - ENCRYPTION_KEY=$ENCRYPTION_KEY_RINKEBY
+      - SESSION_SECRET=$SESSION_SECRET_RINKEBY
+      - DATABASE_URL=$DATABASE_URL_RINKEBY
+      - REDIS_URL=$REDIS_URL_RINKEBY
+      - NODE_ENV=production
+      - CSLOVE_PRICE_API=$CSLOVE_PRICE_API_RINKEBY
+      - PROVIDER=$PROVIDER_RINKEBY
+      - PROVIDER_WS=$PROVIDER_WS_RINKEBY
+    volumes:
+      - dshop-rinkeby-data:/app/backend/data
+      - dshop-rinkeby-db:/app/backend/db
+
+
+  dshop-mainnet:
+    image: "registry.gitlab.com/commonsstacklove/cs-dshop:0.5"
+    depends_on:
+      - redis
+      - postgres
+    expose:
+      - 3000/tcp
+    environment:
+      - ENCRYPTION_KEY=$ENCRYPTION_KEY_MAINNET
+      - SESSION_SECRET=$SESSION_SECRET_MAINNET
+      - DATABASE_URL=$DATABASE_URL_MAINNET
+      - REDIS_URL=$REDIS_URL_MAINNET
+      - NODE_ENV=production
+      - CSLOVE_PRICE_API=$CSLOVE_PRICE_API_MAINNET
+      - PROVIDER=$PROVIDER_MAINNET
+      - PROVIDER_WS=$PROVIDER_WS_MAINNET
+    volumes:
+      - dshop-data:/app/backend/data
+      - dshop-db:/app/backend/db
+
+
+  reverseproxy:
+    restart: unless-stopped
+    image: staticfloat/nginx-certbot
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      - CERTBOT_EMAIL
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
+
+volumes:
+    letsencrypt:
+    dshop-data:
+    dshop-db:
+    dshop-rinkeby-data:
+    dshop-rinkeby-db:
+    postgres-data:

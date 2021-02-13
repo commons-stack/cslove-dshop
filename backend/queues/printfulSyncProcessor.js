@@ -56,16 +56,16 @@ const processor = async (job) => {
     apiKey,
     smartFetch,
     forceRefetchIds,
-    refreshImages,
-    shopId
+    refreshImages
+    // shopId
   } = job.data
 
-  if (shopId === 1) {
-    // Skip running the processor for gitcoin
-    // since that is one deleted shop
-    log(100, 'Skipping sync on shop')
-    return
-  }
+  // if (shopId === 1) {
+  //   // Skip running the processor for gitcoin
+  //   // since that is one deleted shop
+  //   log(100, 'Skipping sync on shop')
+  //   return
+  // }
 
   let taskStartTime = Date.now()
 
