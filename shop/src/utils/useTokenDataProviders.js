@@ -111,7 +111,7 @@ const csPriceGet = async (tokens) => {
 
   const urlBase = 'https://ogn.commonsstack.org/cs/price'
 
-  const url = process.env.TEC_PRICE_API || `${urlBase}?tsyms=${tokenSymbols}`
+  const url = process.env.CSLOVE_PRICE_API || `${urlBase}?tsyms=${tokenSymbols}`
 
   const resp = await fetch(url)
   const data = await resp.json()
