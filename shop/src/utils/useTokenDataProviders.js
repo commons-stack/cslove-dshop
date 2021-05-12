@@ -102,18 +102,16 @@ const cryptocompareGet = async (tokens) => {
   }
 }
 
-const csLoveGet = async (tokens) => {
+const csPriceGet = async (tokens) => {
   const _tokens = Array.isArray(tokens) ? tokens : [tokens]
 
   if (!_tokens.length) return {}
 
-  const tokenSymbols = _tokens.map((t) => t.name)
+  const tokenSymbols = _tokens.map((t) => t.name).join(',')
 
-  if (tokenSymbols.indexOf('CSLOVE') === -1) return {}
+  const urlBase = 'https://ogn.commonsstack.org/cs/price'
 
-  const url =
-    process.env.CSLOVE_PRICE_API ||
-    `https://ogn.commonsstack.org/cs/price?fsym=USD&tsyms=${tokenSymbols}`
+  const url = process.env.TEC_PRICE_API || `${urlBase}?tsyms=${tokenSymbols}`
 
   const resp = await fetch(url)
   const data = await resp.json()
@@ -144,8 +142,8 @@ const useTokenDataProviders = () => {
     },
     {
       id: 'cslove_oracle',
-      name: 'csLovePrice',
-      getTokenPrices: csLoveGet
+      name: 'CS Price Oracle',
+      getTokenPrices: csPriceGet
     }
   ]
 
