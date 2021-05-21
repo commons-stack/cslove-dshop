@@ -23,7 +23,8 @@ services:
       - 5432/tcp
 
   redis:
-    image: "redis:alpine"
+    image: 'redis:alpine'
+    restart: always
     command: redis-server --requirepass ${REDIS_PASSWORD}
     expose:
       - 6379/tcp
@@ -34,13 +35,15 @@ services:
      - REDIS_REPLICATION_MODE=master
 
   dshop-rinkeby:
-    image: "registry.gitlab.com/commonsstacklove/cs-dshop:0.5"
+    image: 'registry.gitlab.com/commonsstacklove/cs-dshop:main'
+    restart: always
     depends_on:
       - redis
       - postgres
     expose:
       - 3001/tcp
     environment:
+      - PORT=3001
       - ENCRYPTION_KEY=$ENCRYPTION_KEY_RINKEBY
       - SESSION_SECRET=$SESSION_SECRET_RINKEBY
       - DATABASE_URL=$DATABASE_URL_RINKEBY
@@ -55,7 +58,8 @@ services:
 
 
   dshop-mainnet:
-    image: "registry.gitlab.com/commonsstacklove/cs-dshop:0.5"
+    image: 'registry.gitlab.com/commonsstacklove/cs-dshop:main'
+    restart: always
     depends_on:
       - redis
       - postgres
