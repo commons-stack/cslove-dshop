@@ -19,7 +19,7 @@ const validate = (state) => {
       'Token symbol is required',
       'admin.settings.payments.CustomTokenModal.nameError'
     )
-  } else if (state.name.length > 6) {
+  } else if (state.name.length > 7) {
     newState.nameError = fbt(
       'Token symbol too long',
       'admin.settings.payments.CustomTokenModal.nameLenError'
@@ -211,12 +211,12 @@ const CustomTokenModal = ({ onNewTokenAdded }) => {
             </div>
 
             {!state.testError ? null : (
-              <div className="alert alert-danger my-3">{state.testError}</div>
+              <div className="my-3 alert alert-danger">{state.testError}</div>
             )}
 
             <div className="actions">
               <button
-                className="btn btn-outline-primary mr-2"
+                className="mr-2 btn btn-outline-primary"
                 type="button"
                 onClick={() => setState({ shouldClose: true })}
               >
