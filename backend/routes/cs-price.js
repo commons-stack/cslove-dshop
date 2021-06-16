@@ -6,7 +6,7 @@ const manualPrices = {
 
 module.exports = function (router) {
   // This endpoint will tell the price of manually configured tokens
-  router.get('/tec/price', async (req, res) => {
+  router.get('/cs/price', async (req, res) => {
     const tsyms = req.query.tsyms
     const prices = {}
     tsyms.split(',').map((symbol) => {
