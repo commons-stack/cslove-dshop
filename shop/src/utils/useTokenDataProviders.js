@@ -109,12 +109,13 @@ const csPriceGet = async (tokens) => {
 
   const tokenSymbols = _tokens.map((t) => t.name).join(',')
 
-  const urlBase = 'https://ogn.commonsstack.org/cs/price'
-
-  const url = process.env.CSLOVE_PRICE_API || `${urlBase}?tsyms=${tokenSymbols}`
+  const urlBase = process.env.CSLOVE_PRICE_API
+  const url = `${urlBase}?tsyms=${tokenSymbols}`
+  console.log(url)
 
   const resp = await fetch(url)
   const data = await resp.json()
+  console.log(JSON.stringify(url))
 
   return data
 }
