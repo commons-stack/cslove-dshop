@@ -1,11 +1,10 @@
 version: '3'
 
 services:
-
   postgres:
     image: postgres:13.1
     healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      test: ['CMD', 'pg_isready', '-q', '-d', 'postgres', '-U', 'root']
       timeout: 45s
       interval: 10s
       retries: 10
@@ -32,10 +31,10 @@ services:
       - $PWD/redis-data:/var/lib/redis
       - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-     - REDIS_REPLICATION_MODE=master
+      - REDIS_REPLICATION_MODE=master
 
   dshop-rinkeby:
-    image: 'registry.gitlab.com/commonsstacklove/cs-dshop:main'
+    image: 'ghcr.io/commons-stack/cslove-dshop:main'
     restart: always
     depends_on:
       - redis
@@ -56,9 +55,8 @@ services:
       - dshop-rinkeby-data:/app/backend/data
       - dshop-rinkeby-db:/app/backend/db
 
-
   dshop-mainnet:
-    image: 'registry.gitlab.com/commonsstacklove/cs-dshop:main'
+    image: 'ghcr.io/commons-stack/cslove-dshop:main'
     restart: always
     depends_on:
       - redis
@@ -78,7 +76,6 @@ services:
       - dshop-data:/app/backend/data
       - dshop-db:/app/backend/db
 
-
   reverseproxy:
     restart: unless-stopped
     image: staticfloat/nginx-certbot
@@ -92,9 +89,9 @@ services:
       - letsencrypt:/etc/letsencrypt
 
 volumes:
-    letsencrypt:
-    dshop-data:
-    dshop-db:
-    dshop-rinkeby-data:
-    dshop-rinkeby-db:
-    postgres-data:
+  letsencrypt:
+  dshop-data:
+  dshop-db:
+  dshop-rinkeby-data:
+  dshop-rinkeby-db:
+  postgres-data:
