@@ -29,9 +29,6 @@ function usePrice(targetCurrency = 'USD', preferredCurrency = 'USD') {
     json.OUSD = 1
     const acceptedTokens = config.acceptedTokens || []
 
-    console.log('EXCHANGE RATES: ' + JSON.stringify(json))
-    console.log('ACCEPTED TOKENS: ' + JSON.stringify(acceptedTokens))
-
     // Find tokens that don't have rates and look them up by contract address
     const withoutRates = acceptedTokens.filter(
       (token) => !json[token.name] && token.address
@@ -45,9 +42,6 @@ function usePrice(targetCurrency = 'USD', preferredCurrency = 'USD') {
             ? token.apiProvider === provider.id
             : provider.id === 'coingecko_symbol'
         )
-
-        console.log('PROVIDER: ' + provider.id)
-        console.log('FILTERED TOKENs: ' + JSON.stringify(filteredTokens))
 
         if (filteredTokens.length === 0) continue
 

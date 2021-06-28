@@ -109,7 +109,6 @@ const csPriceGet = async (tokens) => {
 
   const tokenSymbols = _tokens.map((t) => t.name).join(',')
 
-  console.log('FETCH TOKEN PRICE')
   const url = `https://ogn.commonsstack.org/cs/price?tsyms=${tokenSymbols}`
   const resp = await fetch(url)
   const data = await resp.json()
