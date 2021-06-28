@@ -51,6 +51,7 @@ services:
       - CSLOVE_PRICE_API=$CSLOVE_PRICE_API_RINKEBY
       - PROVIDER=$PROVIDER_RINKEBY
       - PROVIDER_WS=$PROVIDER_WS_RINKEBY
+      - REDIS_PASSWORD=$REDIS_PASSWORD
     volumes:
       - dshop-rinkeby-data:/app/backend/data
       - dshop-rinkeby-db:/app/backend/db
@@ -72,6 +73,7 @@ services:
       - CSLOVE_PRICE_API=$CSLOVE_PRICE_API_MAINNET
       - PROVIDER=$PROVIDER_MAINNET
       - PROVIDER_WS=$PROVIDER_WS_MAINNET
+      - REDIS_PASSWORD=$REDIS_PASSWORD
     volumes:
       - dshop-data:/app/backend/data
       - dshop-db:/app/backend/db
