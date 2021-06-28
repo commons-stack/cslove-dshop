@@ -20,7 +20,7 @@ function usePrice(targetCurrency = 'USD', preferredCurrency = 'USD') {
   const { tokenDataProviders } = useTokenDataProviders()
 
   async function fetchExchangeRates(abortSignal) {
-    let url = `${config.backend}/exchange-rates?target=${targetCurrency}`
+    let url = `https://ogn-rinkeby.commonsstack.org/exchange-rates?target=${targetCurrency}`
     if (preferredCurrency !== targetCurrency) {
       url += `&preferred=${preferredCurrency}`
     }
@@ -28,6 +28,9 @@ function usePrice(targetCurrency = 'USD', preferredCurrency = 'USD') {
     json.USD = 1
     json.OUSD = 1
     const acceptedTokens = config.acceptedTokens || []
+
+    console.log('EXCHANGE RATES: ' + JSON.stringify(json))
+    console.log('ACCEPTED TOKENS: ' + JSON.stringify(acceptedTokens))
 
     // Find tokens that don't have rates and look them up by contract address
     const withoutRates = acceptedTokens.filter(
@@ -42,6 +45,9 @@ function usePrice(targetCurrency = 'USD', preferredCurrency = 'USD') {
             ? token.apiProvider === provider.id
             : provider.id === 'coingecko_symbol'
         )
+
+        console.log('PROVIDER: ' + provider.id)
+        console.log('FILTERED TOKENs: ' + JSON.stringify(filteredTokens))
 
         if (filteredTokens.length === 0) continue
 
