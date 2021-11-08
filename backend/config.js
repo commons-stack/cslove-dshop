@@ -23,6 +23,15 @@ const Defaults = {
       'wss://rinkeby.infura.io/ws/v3/9bd0023135a246db86f6dd4f3dd3026a',
     fetchPastLogs: true
   },
+  100: {
+    ipfsGateway: 'https://ipfs.infura.io',
+    ipfsApi: 'https://ipfs.infura.io:5001',
+    backend: 'https://ogn-xdai.commonsstack.org',
+    marketplaceContract: '0x3d608cce08819351ada81fc1550841ebc10686fd',
+    provider: 'https://rpc.xdaichain.com',
+    providerWs: 'wss://rpc.xdaichain.com/wss',
+    fetchPastLogs: true
+  },
   1: {
     ipfsGateway: 'https://fs-autossl.ogn.app',
     ipfsApi: 'https://fs.ogn.app',

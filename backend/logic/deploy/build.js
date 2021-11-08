@@ -72,6 +72,8 @@ async function assembleBuild({
   const networkName =
     network.networkId === 1
       ? 'mainnet'
+      : network.networkId === 100
+      ? 'xdai'
       : network.networkId === 4
       ? 'rinkeby'
       : 'localhost'

@@ -10,6 +10,11 @@ export const Networks = [
     name: 'Rinkeby'
   },
   {
+    id: 100,
+    idStr: 'xDai',
+    name: 'xDai'
+  },
+  {
     id: 999,
     idStr: 'localhost',
     name: 'Localhost'

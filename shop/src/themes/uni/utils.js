@@ -90,6 +90,8 @@ export function useWeb3Manager() {
       ret.desiredNetwork =
         defaultChainId === 1
           ? 'Mainnet'
+          : defaultChainId === 100
+          ? 'xDai'
           : defaultChainId === 4
           ? 'Rinkeby'
           : `Chain ID ${defaultChainId}`
@@ -349,7 +351,12 @@ export const defaultChainId = 4
 const mainnet = `aHR0cHM6Ly9ldGgtbWFpbm5ldC5hbGNoZW15YXBpLmlvL3YyL2ppTXNVaWwyOGViZFJhTG9KOERLNEVxSHZDZ0U5eVEz`
 const rinkeby = `aHR0cHM6Ly9ldGgtcmlua2VieS5hbGNoZW15YXBpLmlvL3YyL1pmT3FJbk9mX1lxYXZfd2ExS2poeWFoeV9EaWE0UmFN`
 const networkConnector = new NetworkConnector({
-  urls: { 1: atob(mainnet), 4: atob(rinkeby), 1337: 'http://localhost:8545' },
+  urls: {
+    1: atob(mainnet),
+    4: atob(rinkeby),
+    100: 'https://rpc.xdaichain.com',
+    1337: 'http://localhost:8545'
+  },
   defaultChainId
 })
 

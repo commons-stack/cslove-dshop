@@ -14,6 +14,7 @@ const { TEST_DSHOP_CACHE, TEST_THEMES_CACHE } = require('../test/const')
 
 const NETWORK_NAME_TO_ID = {
   localhost: 999,
+  xdai: 100,
   rinkeby: 4,
   mainnet: 1
 }

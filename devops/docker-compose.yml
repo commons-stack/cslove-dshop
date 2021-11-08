@@ -78,6 +78,28 @@ services:
       - dshop-data:/app/backend/data
       - dshop-db:/app/backend/db
 
+  dshop-xdai:
+    image: 'ghcr.io/commons-stack/cslove-dshop:feat-xdai-support'
+    restart: always
+    depends_on:
+      - redis
+      - postgres
+    expose:
+      - 3002/tcp
+    environment:
+      - ENCRYPTION_KEY=$ENCRYPTION_KEY_XDAI
+      - SESSION_SECRET=$SESSION_SECRET_XDAI
+      - DATABASE_URL=$DATABASE_URL_XDAI
+      - REDIS_URL=$REDIS_URL_XDAI
+      - NODE_ENV=production
+      - CSLOVE_PRICE_API=$CSLOVE_PRICE_API_XDAI
+      - PROVIDER=$PROVIDER_XDAI
+      - PROVIDER_WS=$PROVIDER_WS_XDAI
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+    volumes:
+      - dshop-data:/app/backend/data
+      - dshop-db:/app/backend/db
+
   reverseproxy:
     restart: unless-stopped
     image: staticfloat/nginx-certbot
